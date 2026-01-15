@@ -1,6 +1,6 @@
 # Savi2025-2026-assignment2-group-3
 
-#Tarefa 2
+Tarefa 2
 1. Geração de Dataset: generate_dataset.py
 Objetivo
 
@@ -20,7 +20,7 @@ Essa função coordena a geração do dataset, criando um diretório de saída p
 Execução:
 A função generate_dataset é chamada para cada versão do dataset (A, B, C, D), gerando 60.000 imagens de treino e 10.000 imagens de teste para cada versão.
 
-Visualização e Estatísticas: main_dataset_stats.py
+2.Visualização e Estatísticas: main_dataset_stats.py
 Objetivo
 
 O script main_dataset_stats.py tem como objetivo visualizar uma amostra aleatória de imagens e suas anotações, além de gerar estatísticas sobre o dataset. Ele exibe informações como a distribuição de classes (dígitos de 0 a 9), o número médio de dígitos por imagem, o tamanho médio das caixas de anotação, e histogramas de tamanho das caixas e número de dígitos.
@@ -44,7 +44,7 @@ Distribuição das classes (dígitos de 0 a 9).
 
 Histogramas de número de dígitos por imagem e do tamanho das caixas.
 
-Funções de Geração de Imagens: generate_database.py
+3.Funções de Geração de Imagens: generate_database.py
 Objetivo
 
 O script generate_database.py contém funções de utilidade para gerar as imagens do dataset. Ele cuida de como as imagens são manipuladas, redimensionadas, e como as caixas de anotação são geradas e verificadas para evitar sobreposição.
