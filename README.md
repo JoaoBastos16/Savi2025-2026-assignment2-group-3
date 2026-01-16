@@ -1,64 +1,119 @@
-# Savi2025-2026-assignment2-group-3
+# Trabalho Prático 2 – SAVI
+**Classificação e Deteção de Dígitos Manuscritos com CNNs**
 
-Tarefa 2
-1. Geração de Dataset: generate_dataset.py
-Objetivo
+Miguel Riem Oliveira  
+SAVI – 2025/2026
 
-O script generate_dataset.py é responsável por gerar o dataset de "Cenas" com os dígitos do MNIST. Ele cria imagens maiores (128x128) e posiciona os dígitos aleatoriamente, com ou sem variação de escala. O dataset é gerado nas versões A, B, C, e D, conforme os requisitos da tarefa.
+---
 
-Como Funciona
+## Introdução
 
-Importação de Dependências:
-O script usa bibliotecas como os, random, json, cv2 (para manipulação de imagens), torchvision.datasets (para carregar o dataset MNIST), e tqdm (para exibir o progresso).
+Este trabalho explora a utilização de Redes Neuronais Convolucionais (CNNs) para evoluir de um problema clássico de classificação (MNIST) para um cenário mais complexo de deteção e classificação de múltiplos dígitos em imagens maiores. O projeto é desenvolvido de forma incremental, permitindo analisar as limitações e vantagens de diferentes abordagens.
 
-Função generate_scene:
-A função principal que gera uma cena (imagem) com dígitos do MNIST. Ela posiciona os dígitos aleatoriamente na tela, ajustando seu tamanho conforme a versão do dataset. Ela também verifica se há sobreposição entre os dígitos, evitando que eles se sobreponham.
+---
 
-Função generate_dataset:
-Essa função coordena a geração do dataset, criando um diretório de saída para cada versão e gerando imagens de treino e teste. As imagens e suas anotações (bounding boxes e rótulos) são salvas em formato PNG e JSON, respectivamente.
+## Tarefa 1 – Classificação MNIST
 
-Execução:
-A função generate_dataset é chamada para cada versão do dataset (A, B, C, D), gerando 60.000 imagens de treino e 10.000 imagens de teste para cada versão.
+### Metodologia
+Foi implementada uma CNN treinada com o dataset MNIST completo (60.000 imagens de treino e 10.000 de teste). A arquitetura inclui duas camadas convolucionais seguidas de pooling e camadas totalmente ligadas.
 
-2. Visualização e Estatísticas: main_dataset_stats.py
-Objetivo
+### Avaliação
+A avaliação foi realizada no conjunto de teste, com:
+- Matriz de confusão
+- Precision, Recall e F1-Score por classe
+- Médias globais (macro)
 
-O script main_dataset_stats.py tem como objetivo visualizar uma amostra aleatória de imagens e suas anotações, além de gerar estatísticas sobre o dataset. Ele exibe informações como a distribuição de classes (dígitos de 0 a 9), o número médio de dígitos por imagem, o tamanho médio das caixas de anotação, e histogramas de tamanho das caixas e número de dígitos.
+### Resultados
+A CNN alcançou elevada accuracy no conjunto de teste, com desempenho consistente em todas as classes.
 
-Como Funciona
+📌 **Figura a incluir**:
+- `runs/t1/confusion_matrix.png`
 
-Função load_sample:
-Carrega uma amostra aleatória de 9 imagens e suas anotações (salvas em arquivos JSON). Ele seleciona 9 imagens do diretório de treino (data/scenes_D/train) e carrega suas caixas de anotação.
+---
 
-Função visualize:
-Exibe as 9 imagens amostradas em uma grade 3x3. Para cada imagem, as caixas de anotação (bounding boxes) são desenhadas em vermelho.
+## Tarefa 2 – Geração de Dataset de Cenas
 
-Função statistics:
-Gera estatísticas sobre o dataset:
+### Metodologia
+Foi desenvolvido um gerador de cenas sintéticas com dígitos MNIST posicionados aleatoriamente em imagens 128×128. Foram criadas quatro versões do dataset:
 
-Número de dígitos por imagem.
+- **A**: 1 dígito, sem escala
+- **B**: 1 dígito, com escala
+- **C**: múltiplos dígitos, sem escala
+- **D**: múltiplos dígitos, com escala
 
-Tamanho das caixas (largura).
+As imagens incluem anotações em formato JSON com bounding boxes e labels.
 
-Distribuição das classes (dígitos de 0 a 9).
+### Análise
+Foram analisadas:
+- Distribuição de classes
+- Número de dígitos por imagem
+- Dimensão média das bounding boxes
 
-Histogramas de número de dígitos por imagem e do tamanho das caixas.
+📌 **Figuras a incluir**:
+- Mosaico de imagens com bounding boxes (versão D)
+- Histogramas gerados pelo `main_dataset_stats.py`
 
-3. Funções de Geração de Imagens: generate_database.py
-Objetivo
+---
 
-O script generate_database.py contém funções de utilidade para gerar as imagens do dataset. Ele cuida de como as imagens são manipuladas, redimensionadas, e como as caixas de anotação são geradas e verificadas para evitar sobreposição.
+## Tarefa 3 – Deteção por Janela Deslizante
 
-Como Funciona
+### Metodologia
+A CNN treinada na Tarefa 1 foi utilizada como classificador numa abordagem de Sliding Window. A imagem é percorrida por janelas de vários tamanhos, sendo cada recorte classificado individualmente.
 
-Função iou:
-Calcula a Interseção sobre a União (IoU) entre duas caixas de delimitadores, que é usada para verificar se há sobreposição entre as caixas.
+Para reduzir falsos positivos foram usados:
+- Threshold de confiança
+- Margem entre as duas classes mais prováveis
+- Entropia da distribuição softmax
+- Filtro de sobreposição (IoU + intensidade média)
 
-Função non_overlapping:
-Verifica se uma nova caixa de anotação não se sobrepõe às caixas já presentes na imagem.
+### Discussão
+Apesar de funcional, esta abordagem apresenta:
+- Elevado custo computacional
+- Muitos falsos positivos
+- Deteções redundantes
 
-Função generate_scene:
-Gera uma "cena" com dígitos do MNIST dispostos aleatoriamente, usando a função non_overlapping para evitar sobreposição entre os dígitos.
+📌 **Figuras a incluir**:
+- 2–3 imagens com deteções da Tarefa 3
 
-Função generate_dataset:
-Gera o dataset de imagens e anotações, salvando as imagens em formato PNG e as anotações em formato JSON.
+---
+
+## Tarefa 4 – Detetor e Classificador Integrado
+
+### Metodologia
+Para superar as limitações da janela deslizante, foi implementada uma abordagem baseada em **Region Proposals**, utilizando segmentação clássica:
+
+1. Segmentação por thresholding e morfologia
+2. Extração de componentes conectados
+3. Filtragem geométrica (área, proporção)
+4. Classificação das regiões com a CNN da Tarefa 1
+5. Pós-processamento com Non-Maximum Suppression
+
+Esta abordagem reduz drasticamente o número de regiões avaliadas e melhora a eficiência.
+
+### Comparação T3 vs T4
+
+| Critério | Sliding Window | Region Proposals |
+|--------|----------------|------------------|
+| Nº de forward passes | Muito elevado | Reduzido |
+| Velocidade | Lenta | Rápida |
+| Falsos positivos | Muitos | Menos |
+| Complexidade | Bruta | Estruturada |
+
+📌 **Figuras a incluir**:
+- As mesmas imagens usadas na T3, agora com resultados da T4
+
+---
+
+## Dificuldades
+
+- Gestão de falsos positivos na Sliding Window
+- Ajuste de thresholds
+- Segmentação robusta em imagens com múltiplos dígitos
+- Garantir compatibilidade entre MNIST e cenas sintéticas
+
+---
+
+## Conclusão
+
+O trabalho demonstrou a evolução de um classificador simples para um sistema completo de deteção de objetos. A abordagem baseada em Region Proposals mostrou-se significativamente mais eficiente e adequada para este tipo de problema.
+
