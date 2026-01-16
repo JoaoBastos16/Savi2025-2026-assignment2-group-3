@@ -48,9 +48,10 @@ Foram analisadas:
 - Número de dígitos por imagem
 - Dimensão média das bounding boxes
 
-📌 **Figuras a incluir**:
-- Mosaico de imagens com bounding boxes (versão D)
-- Histogramas gerados pelo `main_dataset_stats.py`
+![Exemplo de imagens com bounding boxes](figures/Figure1.png)
+![Distribuição da classes](figures/Figure2.png)
+![Média de dígitos por imagem](figures/Figure3.png)
+![Tamanho médio das caixas](figures/Figure4.png)
 
 ---
 
@@ -71,8 +72,9 @@ Apesar de funcional, esta abordagem apresenta:
 - Muitos falsos positivos
 - Deteções redundantes
 
-📌 **Figuras a incluir**:
-- 2–3 imagens com deteções da Tarefa 3
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000001_detections.png)
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000002_detections.png)
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000003_detections.png)
 
 ---
 
@@ -98,8 +100,9 @@ Esta abordagem reduz drasticamente o número de regiões avaliadas e melhora a e
 | Falsos positivos | Muitos | Menos |
 | Complexidade | Bruta | Estruturada |
 
-📌 **Figuras a incluir**:
-- As mesmas imagens usadas na T3, agora com resultados da T4
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000001_detections_t4.png)
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000002_detections_t4.png)
+![Deteções realizadas pelo cõdigo desta tarefa](figures/000003_detections_t4.png)
 
 ---
 
