@@ -48,10 +48,10 @@ Foram analisadas:
 - Número de dígitos por imagem
 - Dimensão média das bounding boxes
 
-![Exemplo de imagens com bounding boxes](figures/Figure1.png)
-![Distribuição da classes](figures/Figure2.png)
-![Média de dígitos por imagem](figures/Figure3.png)
-![Tamanho médio das caixas](figures/Figure4.png)
+![Exemplo de imagens com bounding boxes](figures/Figure_1.png)
+![Distribuição da classes](figures/Figure_2.png)
+![Média de dígitos por imagem](figures/Figure_3.png)
+![Tamanho médio das caixas](figures/Figure_4.png)
 
 ---
 
