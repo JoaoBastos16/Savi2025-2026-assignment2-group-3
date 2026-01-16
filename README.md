@@ -26,7 +26,7 @@ A avaliação foi realizada no conjunto de teste, com:
 ### Resultados
 A CNN alcançou elevada accuracy no conjunto de teste, com desempenho consistente em todas as classes.
 
-![Matriz de confusão do classificador MNIST](figures/t1_confusion_matrix.png)
+![Matriz de confusão do classificador MNIST](figures/confusion_matrix.png)
 
 ---
 
