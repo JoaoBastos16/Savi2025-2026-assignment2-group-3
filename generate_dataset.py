@@ -13,7 +13,7 @@ IMAGE_SIZE = 128  # Tamanho da imagem final (128x128)
 MIN_SCALE = 22  # Escala mínima
 MAX_SCALE = 36  # Escala máxima
 MNIST_URL = "https://ossci-datasets.s3.amazonaws.com/mnist/"  # Novo link
-OUTPUT_ROOT = "data"
+OUTPUT_ROOT = "./Trabalho2/savi_datasets"  # Diretório de saída para o dataset gerado
 
 VERSIONS = {
     "A": dict(min_digits=1, max_digits=1, scale=False),  # 1 dígito fixo
@@ -83,7 +83,7 @@ def generate_dataset(version, split, n_samples):
     os.makedirs(output_dir, exist_ok=True)
 
     mnist = datasets.MNIST(
-        root="data/raw_mnist",
+        root="./Trabalho2/savi_datasets/raw_mnist",
         train=(split == "train"),
         download=True
     )
