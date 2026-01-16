@@ -26,8 +26,8 @@ A avaliação foi realizada no conjunto de teste, com:
 ### Resultados
 A CNN alcançou elevada accuracy no conjunto de teste, com desempenho consistente em todas as classes.
 
-📌 **Figura a incluir**:
-- `runs/t1/confusion_matrix.png`
+**Figura a incluir**:
+`runs/t1/confusion_matrix.png`
 
 ---
 
